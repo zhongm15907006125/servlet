@@ -1,0 +1,79 @@
+-----web.xml部分
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Servlet</display-name>
+  
+   <servlet>
+    <servlet-name>first</servlet-name>
+    <servlet-class>cn.myservlet.FirstServlet</servlet-class>
+    <init-param>
+        <param-name>initParam</param-name>
+        <param-value>Hello Servlet</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>first</servlet-name>
+    <url-pattern>/firstServlet</url-pattern>  
+  </servlet-mapping>
+     <context-param>
+        <param-name>initParamcon</param-name>
+        <param-value>Hello Servlet context</param-value>
+    </context-param>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+ 
+</web-app>
+
+
+--------servlet部分
+package cn.myservlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class FirstServlet extends HttpServlet{
+
+	/**
+	 * 第一次写servlet
+	 */
+   @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	// TODO Auto-generated method stub
+	resp.setContentType("text/html");
+	   PrintWriter out = resp.getWriter();
+	   String initParam=this.getInitParameter("initParam");
+	   String context=this.getServletContext().getInitParameter("initParamcon");
+	out.println("<html>");
+	out.println("<head>sevlet</head>");
+	out.println("<body>");
+	out.println("initParam="+initParam);
+	out.println("</br>");
+	out.println("context="+context);
+	out.println("<h1>hello,servlet</h1>");
+	out.println("<h1>hello,servlet</h1>");
+	out.println("</body>");
+	out.println("</html>");
+
+	out.flush();
+	out.close();
+	
+} 
+   @Override
+public void init() throws ServletException {
+	// TODO Auto-generated method stub
+	   String initParam=this.getInitParameter("initParam");
+	   System.out.println("initParam="+initParam);
+}
+}
