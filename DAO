@@ -1,0 +1,45 @@
+模式
+1.package
+    class 
+      method and varible
+    
+1.bean
+    User类
+      基本变量id,name等,有参无参构造函数,get,set方法
+2.dao
+    UserDao接口 interface
+      getUserByUserName()方法  参数为username,返回值为user
+3.dao.impl    //dao的实现层
+    UserDaoImpl()类实现UserDao接口
+      实现getUserByUserName()方法
+        if(username=="admin")
+        {
+          User user=new User();
+          user.setid(1);
+          user.setname("admin");
+          user.setpassword("123");
+          
+          return User;
+        }else{  return null;   }
+4.biz   //接口层
+    UserBiz
+      login()  返回值User  参数列表:String Username  ,String  password
+5.biz.impl   //biz的实现层
+    UserBizImpl
+      实现login()方法
+        UserDao userDao;
+        public UserBizImpl(){
+          userDao=new UserDaoImpl();
+        }
+        public User login(String Username,String  password){
+        User user=userDao.getUserByUserName(username);
+        
+        if(user!=null){
+          boolean isok=user.getpassword().equals(password);
+          
+          if(isok){
+            return user;
+          }
+          return null;
+        }
+        }
