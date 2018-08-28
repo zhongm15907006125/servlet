@@ -1,0 +1,29 @@
+-----web.xml配置
+
+ <init-param>
+        <param-name>file</param-name>
+        <param-value>/WEB-INF/test.properties</param-value>
+    </init-param>
+    --可以作为初始化参数放在<servlet>中,也可以作为上下文参数放在<servlet>之外,value是路径
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+    String file=this.getInitParameter("file");
+    System.out.println(file);
+	String realpath=this.getServletContext().getRealPath(file);
+	pp.load(new FileInputStream(realpath));
+	
+	String name=pp.getProperty("name");
+	String password=pp.getProperty("password");
+	
+	System.out.println(name+"   "+password);
+	
+	}
