@@ -10,7 +10,19 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
         //得到枚举
         Enumeration paramNames=request.getParameterNames();
         //枚举有两个方法，hasMoreElements() 返回布尔值和 nextElement() 返回一个枚举值.
-        if(paramNames.hasMoreElements()){
-            String paramName=paramNames.nextElement();
-            String 
+        while(paramNames.hasMoreElements()){
+            String paramName = (String)paramNames.nextElement();
+            String[] paramValues = paramName.getParameterValues();
+            if (paramValues.length == 1) {
+                String paramValue = paramValues[0];
+                if (paramValue.length() == 0)
+                    out.println("<td><i>没有值</i></td>");
+                else
+                    out.println("<td>" + paramValue + "</td>");
+            } else {
+                // 读取多个值的数据
+                out.println("<td><ul>");
+                for(int i=0; i < paramValues.length; i++) {
+                out.println("<li>" + paramValues[i]);
+            }
         }
