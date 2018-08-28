@@ -1,0 +1,16 @@
+//request.getParameter() 取表单单个参数的值
+//request.getParameterValues()  参数出现一次以上，则调用该方法，并返回多个值，例如复选框。name相同的复选框
+//request.getParameterNames()  得到所请求的参数的所有列表，返回一个枚举
+// 主要写一下第三个方法的用法
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 设置响应内容类型
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        //得到枚举
+        Enumeration paramNames=request.getParameterNames();
+        //枚举有两个方法，hasMoreElements() 返回布尔值和 nextElement() 返回一个枚举值.
+        if(paramNames.hasMoreElements()){
+            String paramName=paramNames.nextElement();
+            String 
+        }
