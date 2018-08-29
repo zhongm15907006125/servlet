@@ -16,9 +16,10 @@
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-    String file=this.getInitParameter("file");
+    String file=this.getInitParameter("file");   //其实就是一个init-Param,通过name的值得到value的值
     System.out.println(file);
-	String realpath=this.getServletContext().getRealPath(file);
+	String realpath=this.getServletContext().getRealPath(file); //getServletContext()这个函数在得到init-context 上下文参数的
+     // 时候也用到了
 	pp.load(new FileInputStream(realpath));
 	
 	String name=pp.getProperty("name");
