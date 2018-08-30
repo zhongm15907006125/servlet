@@ -30,6 +30,10 @@ public class ListServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		ProfileBiz profilebiz=new ProfileBizImpl();
 		List<Profile> profiles=profilebiz.getAllProfiles()
+		request.setAttribute("profiles",profiles);
+                requestDispatcher rd=request.getRequestDispather("index.jsp");
+                rd.forward(request,response);//将得到的profile集合传递到index。jsp界面
+
 	}
 
 }
